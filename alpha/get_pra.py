@@ -3,8 +3,6 @@
 # and save them in a text file
 
 import PyPDF2
-import os
-import sys
 import re
 
 # read the pdf file using its path

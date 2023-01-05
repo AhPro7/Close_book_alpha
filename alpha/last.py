@@ -13,39 +13,20 @@ def read_top_3(file_name):
     di['third'] = pra_list[2]
     return di
 
-import requests
-
-
-
-API_URL = "https://api-inference.huggingface.co/models/Ahmed007/close-book"
-headers = {"Authorization": "Bearer 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"}
-
-def query(payload):
-	response = requests.post(API_URL, headers=headers, json=payload)
-	return response.json()
-di = read_top_3('top_3.txt')
-output = query({
-	"inputs": {
-		"question": "what is an image classification?",
-		"context": di['first']
-	},
-})
-
-output1 = query({
-	"inputs": {
-		"question": "what is an image classification?",
-		"context": di['second']
-	},
-})
-
-output2 = query({
-	"inputs": {
-		"question": "what is an image classification?",
-		"context": di['third']
-	},
-})
-
-
-print(output)
-print(output1)
-print(output2)
+#print the top 3 paragraphs
+def print_top_3(top_3):
+	print('The first paragraph is: ')
+	print('------------------------')
+	print(top_3['first'])
+	print('------------------------')
+	print('------------------------')
+	print('The second paragraph is: ')
+	print('------------------------')
+	print(top_3['second'])
+	print('------------------------')
+	print('------------------------')
+	print('The third paragraph is: ')
+	print('------------------------')
+	print(top_3['third'])
+	print('------------------------')
+	print('------------------------')
