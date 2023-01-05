@@ -58,14 +58,14 @@ nltk.download('punkt')
 #check if the question answer may be in the paragraph
 #return the score
 def score(pra, question):
-    # get the question words
-    question_words = nltk.word_tokenize(question)
-    # get the paragraph words
-    pra_words = nltk.word_tokenize(pra)
-    # get the intersection of the question words and the paragraph words
-    intersection = set(question_words).intersection(set(pra_words))
-    # get the score
-    score = len(intersection)/len(question_words)
+    pra = pra.lower()
+    question = question.lower()
+    pra = nltk.word_tokenize(pra)
+    question = nltk.word_tokenize(question)
+    score = 0
+    for word in pra:
+        if word in question:
+            score += 1
     return score
 
 # read the text file with all paragraphs with "'\n\n\n'+ '------------------------' +'\n\n\n'" as the separator

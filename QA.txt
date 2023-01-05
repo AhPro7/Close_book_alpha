@@ -1,0 +1,16 @@
+    التجربة الان لنظام Close Bookمن كتاب deep learning for vision systems
+
+
+
+What is the purpose of the optimizer?
+
+what is the role of loss function?
+
+what is an image classification?
+
+what is the goal of the discriminator model?
+
+who is Ibn al-Haytham?
+
+What is transfer learning?
+
