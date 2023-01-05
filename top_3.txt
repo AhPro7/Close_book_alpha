@@ -1,0 +1,130 @@
+10 CHAPTER  1Welcome to computer vision
+CAN MACHINE  LEARNING  ACHIEVE  BETTER  PERFORMANCE  THAN THE HUMAN  BRAIN ?
+Well, if you had asked me this question 10 years ago, I would’ve probably said no,
+machines cannot surpass the accuracy of a human. But let’s take a look at the follow-
+ing two scenarios: 
+Suppose you were given a book of 10,000 dog images, classified by breed, and
+you were asked to learn the properties of each breed. How long would it take
+you to study the 130 breeds in 10,000 images? And if you were given a test of
+100 dog images and asked to label them based on what you learned, out of the
+100, how many would you get right? Well, a neural network that is trained in a
+couple of hours can achieve more than 95% accuracy.
+On the creation side, a neural network can study the patterns in the strokes, col-
+ors, and shading of a particular piece of art. Based on this analysis, it can then
+transfer the style from the original artwork into a new image and create a new
+piece of original art within a few seconds.
+Recent AI and DL advances have allowed machines to surpass human visual ability in
+many image classification and object detection applications, and capacity is rapidly
+expanding to many other applications. But don’t take my word for it. In the next sec-
+tion, we’ll discuss some of the most popular CV applications using DL technology.
+1.2 Applications of computer vision
+Computers began to be able to recognize human faces in images decades ago, but now
+AI systems are rivaling the ability of computers to classify objects in photos and videos.
+Thanks to the dramatic evolution in both computational power and the amount of data
+available, AI and DL have managed to achieve superhuman performance on many com-
+plex visual perception tasks like image search and captioning, image and video classifi-
+cation, and object detection. Moreover, deep neural networks are not restricted to
+CV tasks: they are also successful at natural language processing and voice user inter-
+face tasks. In this book, we’ll focus on visual applications that are applied in CV tasks. 
+ DL is used in many computer vision applications to recognize objects and their
+behavior. In this section, I’m not going to attempt to list all the CV applications that are
+out there. I would need an entire book for that. Instead, I’ll give you a bird’s-eye view of
+some of the most popular DL algorithms and their possible applications across different
+industries. Among these industries are autonomous cars, drones, robots, in-store cam-
+eras, and medical diagnostic scanners that can detect lung cancer in early stages.
+1.2.1 Image classification
+Image classification  is the task of assigning to an image a label from a predefined set of
+categories. A  convolutional neural network  is a neural network type that truly shines in
+processing and classifying images in many different applications:
+Lung cancer diagnosis —Lung cancer is a growing problem. The main reason lung
+cancer is very dangerous is that when it is diagnosed, it is usually in the middle or
+
+
+------------------------
+
+
+18 CHAPTER  1Welcome to computer vision
+DEFINITIONS An image classifier  is an algorithm that takes in an image as input
+and outputs a label or “class” that identifies that image. A class (also called a
+category ) in machine learning is the output category of your data.
+Here is how the image flows through the classification pipeline:
+1A computer receives visual input from an imaging device like a camera. This
+input is typically captured as an image or a sequence of images forming a video.
+2Each image is then sent through some preprocessing steps whose purpose is to
+standardize the images. Common preprocessing steps include resizing an
+image, blurring, rotating, changing its shape, or transforming the image from
+one color to another, such as from color to grayscale. Only by standardizing the
+images—for example, making them the same size—can you then compare
+them and further analyze them.
+3We extract features. Features  are what help us define objects, and they are usu-
+ally information about object shape or color. For example, some features that
+distinguish a motorcycle are the shape of the wheels, headlights, mudguards,
+and so on. The output of this process is a feature vector  that is a list of unique
+shapes that identify the object.
+4The features are fed into a classification model . This step looks at the feature vec-
+tor from the previous step and predicts the class of the image. Pretend that you
+are the classifier model for a few minutes, and let’s go through the classification
+process. You look at the list of features in the feature vector one by one and try
+to determine what’s in the image:
+aFirst you see a wheel  feature; could this be a car, a motorcycle, or a dog?
+Clearly it is not a dog, because dogs don’t have wheels (at least, normal dogs,
+not robots). Then this could be an image of a car or a motorcycle.
+bYou move on to the next feature, the headlight s. There is a higher probability
+that this is a motorcycle than a car.
+cThe next feature is rear mudguards —again, there is a higher probability that
+it is a motorcycle.1. Input data 2. Preprocessing
+• Geometric
+transforming
+• Image blurring3. Feature extraction
+P(motorcycle) = 0.854. Classiﬁer
+Features vectorP(car) = 0.14
+P(dog) = 0.01
+Figure 1.14 Using the machine learning model to predict the probability of the motorcycle object from the 
+motorcycle, car, and dog classes
+
+
+------------------------
+
+
+27 Feature extraction
+1.6 Feature extraction
+Feature extraction  is a core component of the CV pipeline. In fact, the entire DL model
+works around the idea of extracting useful features that clearly define the objects in
+the image. So we’ll spend a little more time here, because it is important that you
+understand what a feature is, what a vector of features is, and why we extract features.
+DEFINITION A feature in machine learning is an individual measurable prop-
+erty or characteristic of an observed phenomenon. Features are the input that
+you feed to your ML model to output a prediction or classification. Suppose
+you want to predict the price of a house: your input features (properties)
+might include square_foot , number_of_rooms , bathrooms , and so on, and
+the model will output the predicted price based on the values of your fea-
+tures. Selecting good features that clearly distinguish your objects increases
+the predictive power of ML algorithms.
+1.6.1 What is a feature in computer vision?
+In CV, a feature is a measurable piece of data in your image that is unique to that spe-
+cific object. It may be a distinct color or a specific shape such as a line, edge, or image
+segment. A good feature is used to distinguish objects from one another. For example,
+if I give you a feature like a wheel and ask you to guess whether an object is a motorcy-
+cle or a dog, what would your guess be? A motorcycle. Correct! In this case, the wheel
+is a strong feature that clearly distinguishes between motorcycles and dogs. However,
+if I give you the same feature (a wheel) and ask you to guess whether an object is a
+bicycle or a motorcycle, this feature is not strong enough to distinguish between those
+objects. You need to look for more features like a mirror, license plate, or maybe a
+pedal, that collectively describe an object. In ML projects, we want to transform the
+raw data (image) into a feature vector to show to our learning algorithm, which can
+learn the characteristics of the object (figure 1.22).
+ In the figure, we feed the raw input image of a motorcycle into a feature extraction
+algorithm. Let’s treat the feature extraction algorithm as a black box for now, and we
+will come back to it. For now, we need to know that the extraction algorithm produces
+a vector that contains a list of features. This feature vector is a 1D array that makes a
+robust representation of the object.You must make certain assumptions about the dataset and the problem you are try-
+ing to solve. For some datasets, it is best to convert the colored images to grayscale,
+while for other datasets, you might need to keep or adjust the color images.
+The good news is that, unlike traditional machine learning, DL algorithms require min-
+imum data preprocessing because, as you will see soon, neural networks do most of
+the heavy lifting in processing an image and extracting features.
+
+
+------------------------
+
+
