@@ -58,14 +58,17 @@ nltk.download('punkt')
 #check if the question answer may be in the paragraph
 #return the score
 def score(pra, question):
-    pra = pra.lower()
-    question = question.lower()
-    pra = nltk.word_tokenize(pra)
-    question = nltk.word_tokenize(question)
-    score = 0
-    for word in pra:
-        if word in question:
-            score += 1
+    # get the question words
+    question_words = nltk.word_tokenize(question)
+    # get the paragraph words
+    pra_words = nltk.word_tokenize(pra)
+    # get the number of question words in the paragraph
+    count = 0
+    for word in question_words:
+        if word in pra_words:
+            count += 1
+    # get the score
+    score = count/len(question_words)
     return score
 
 # read the text file with all paragraphs with "'\n\n\n'+ '------------------------' +'\n\n\n'" as the separator
@@ -86,6 +89,10 @@ def get_top_3(pra_list, question):
     for i in range(3):
         top_3.append(pra_list[score_list.index(max(score_list))])
         score_list[score_list.index(max(score_list))] = 0
+
+    # replace the new line with space in the top 3 paragraphs only
+    for i in range(len(top_3)):
+        top_3[i] = top_3[i].replace('\n', '')
     return top_3
 
 

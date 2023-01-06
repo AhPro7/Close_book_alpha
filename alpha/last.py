@@ -1,32 +1,10 @@
-# final
+import transformers
+from transformers import pipeline
 
-# read the top_3.txt file with all paragraphs with "'\n\n\n'+ '------------------------' +'\n\n\n'" as the separator
-# and return a dic of paragraphs
-# like this: {'first': 'paragraph 1', 'second': 'paragraph 2', 'third': 'paragraph 3'}
-def read_top_3(file_name):
-    with open(file_name, 'r') as f:
-        text = f.read()
-    pra_list = text.split('\n\n\n'+ '------------------------' +'\n\n\n')
-    di = {}
-    di['first'] = pra_list[0]
-    di['second'] = pra_list[1]
-    di['third'] = pra_list[2]
-    return di
-
-#print the top 3 paragraphs
-def print_top_3(top_3):
-	print('The first paragraph is: ')
-	print('------------------------')
-	print(top_3['first'])
-	print('------------------------')
-	print('------------------------')
-	print('The second paragraph is: ')
-	print('------------------------')
-	print(top_3['second'])
-	print('------------------------')
-	print('------------------------')
-	print('The third paragraph is: ')
-	print('------------------------')
-	print(top_3['third'])
-	print('------------------------')
-	print('------------------------')
+model_checkpoint = "Ahmed007/close-book"
+question_answerer = pipeline("question-answering", model=model_checkpoint)
+print(question_answerer(question='1',
+                      context='''
+The histogram is the most basic graph type for visualizing a distribution. It is a specific kind of bar chart that presents the tabulated frequency of data over distinct intervals, “called bins”
+The entire sample is divided into these bins, and the height of each bar shows the number of observations within each interval. Histograms can show where values are concentrated within a distribution, where extreme values are, and whether there are any gaps or unusual values.
+					  '''))
