@@ -31,8 +31,17 @@ wiki_html = wikipediaapi.Wikipedia(
         extract_format=wikipediaapi.ExtractFormat.HTML
 )
 p_html = wiki_html.page(title)
-# get the paragraphs of the page using html <p> tag and put them in a list
-paragraphs = p_html.text.split('</p>')
+# get all paragraphs between <p> and </p> and store them in a list
+paragraphs = []
+start = 0
+end = 0
+while True:
+    start = p_html.text.find('<p>', end)
+    end = p_html.text.find('</p>', start)
+    if start == -1 or end == -1:
+        break
+    paragraphs.append(p_html.text[start+3:end])
+
 
 # get top3 paragraphs that have the most keywords with the query in them
 keywords = query.split()
